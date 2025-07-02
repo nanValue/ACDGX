@@ -777,7 +777,7 @@
                         PageButtons.children[i].addEventListener('click',() => {PageButtonChange(i); this.isc = true;});
                     };
 
-                    MoverLeft.addEventListener('click', () => {
+                    MoverRight.addEventListener('click', () => {
                         
                         if (Container.scrollLeft === (Container.children.length - 1)*300) {
 
@@ -792,7 +792,7 @@
                         this.isc = true;
                     });
 
-                    MoverRight.addEventListener('click', () => {
+                    MoverLeft.addEventListener('click', () => {
 
                         if (Container.scrollLeft === 0) {
 
