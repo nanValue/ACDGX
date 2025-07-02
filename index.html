@@ -1,0 +1,990 @@
+<!DOCTYPE HTML>
+<html lang = "zH-Hant">
+
+    <head>
+
+        <meta charset = "UTF-8"/>
+        <meta name = "viewport" content = "width=device-width,initial-scale=1.0">
+
+        <title>りしれ供さ小2</title>
+        <link rel="shortcut icon" href="./imag/aurora_favicon_square.png" type="image/x-icon"/>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        
+        <script src="https://cdn.jsdelivr.net/npm/p5@1.11.7/lib/p5.min.js"></script>
+
+        <style>
+
+            :root {
+
+                --main-backgorund-color: linear-gradient(310deg, #304544 0%, #222624 33%, #503f40 66%, #292932 100%);
+            }
+
+            * {
+
+                margin: 0 auto;
+            }
+
+            main {
+
+                position: relative;
+
+                top: 0;
+
+                min-height: 400vh;
+            }
+
+            img.main, div.main {
+
+                --w: 50vh;
+                --h: 50vh;
+
+                position: fixed;
+
+                left: calc(50% - (var(--w) / 2));
+                top: calc(50% - (var(--h) / 2));
+
+                width: var(--w);
+                height: var(--h);
+
+                box-sizing: border-box;
+
+                animation: Rotate linear both;
+                animation-timeline: view();
+            }
+
+            div.circle {
+
+                background: conic-gradient(#BBF, #BFF, #FBB, #BFB);;
+
+                mask: linear-gradient(rgb(0, 0, 0) 0 0) padding-box exclude,
+                    linear-gradient(white 0 0);
+
+                border: transparent 6px solid;
+                animation: Rotate linear both;
+                animation-timeline: view();
+                /*border-radius: 50%;*/
+            }
+
+            #cont1 {
+
+                background-image: url("./imag/image-31.png");
+                --index: 1;
+            }
+
+            #cont2 {
+
+                background-image: url("./imag/image-15.png");
+                --index: 2;
+            }
+
+            #cont3 {
+
+                background-image: url("./imag/image-24.png");
+                --index: 3;
+            }
+
+            .pages {
+
+                position: relative;
+                top: 100vh;
+
+                --total: 5;
+                --page-height: 100vh;
+                display: grid;
+                grid-template-rows: repeat(var(--total), var(--page-height));
+                grid-template-columns: 1fr;
+
+                .page {
+
+                    position: sticky;
+                    top: 0;
+                    width: 100%;
+                    height: var(--page-height);
+                    
+                    .content {
+
+                        position: sticky;
+                        top: 0;
+
+                        height: var(--page-height);
+                        will-change: width;
+
+                        animation: xFadeIn ease-in-out both;
+                        animation-timeline: view(block);
+                        animation-range: exit 0% exit-crossing 100%;
+
+                        align-content: center;
+                        text-align: center;
+
+                        font-family: "Roboto", sans-serif;
+                        font-size: 96px;
+                        font-weight: 900;
+
+                        color: rgb(163, 232, 255);
+
+                        --shadow-color: rgb(25, 62, 81);
+
+                        text-shadow: 0.01em 0.01em 0 var(--shadow-color),
+                            0.02em 0.02em 0 var(--shadow-color),
+                            0.03em 0.03em 0 var(--shadow-color),
+                            0.03em 0.04em 0 var(--shadow-color),
+                            0.05em 0.05em 0 var(--shadow-color),
+                            0.05em 0.06em 0 var(--shadow-color),
+                            0.05em 0.07em 0 var(--shadow-color);
+                        /*2px 0 #888, -2px 0 #888, 0 2px #888, 0 -2px #888,
+                            1px 1px #888, -1px -1px #888, 1px -1px #888, -1px 1px #888;*/
+
+                        filter: blur(0);
+
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: clip;
+                        background-size: cover;
+                        /*background-repeat: no-repeat;*/
+                    }
+                }
+            }
+
+            .backgroundCanvas {
+
+                position: fixed;
+
+                width: 100vw;
+                height: 600vh;
+                background: black;
+
+                z-index: -1;
+            }
+
+            .Main {
+
+                height: 100%;
+                background: rgb(0, 0, 0);
+                position: sticky;
+                top: 0;
+
+                nav {
+
+                    position: sticky;
+                    top: 0;
+
+                    height: 50px;
+                    background: var(--main-backgorund-color);
+                    box-shadow: gray 0 0 2px 2px;
+                    border-bottom: 1px black solid;
+
+                    z-index: 5;
+
+                    div {
+
+                        display: inline-flex;
+
+                        justify-content: flex-start;
+                        align-items: center;
+
+                        div:first-child {
+
+                            width: calc(60px + 180px);
+
+                            img {
+
+                                flex: 0 0 50px;
+                                width: 50px;
+                                height: 50px;
+                            }
+
+                            span {
+
+                                font-size: 20px;
+                                color: white;
+                                font-family: 'Roboto', Courier, monospace;
+                            }
+                        }
+                    }
+                }
+
+                footer {
+
+                    display: grid;
+                    grid-area: footer;
+                    grid-template-rows: 165px 30px 45px;
+                    background: var(--main-backgorund-color);
+                    box-shadow: black 2px 0px 5px;
+                    color: white;
+                    z-index: 5;
+
+                    /*position: sticky;
+                    position: -webkit-sticky;
+                    top: calc(100vh - 165px - 30px - 45px);*/
+
+                    .line {
+
+                        margin: 5px 0;
+                        width: 95%;
+                        height: 2px;
+                        background: white;
+                    }
+
+                    & > div {
+
+                        margin: 10px 0;
+                    }
+
+                    section {
+
+                        display: flex;
+                        flex-direction: column;
+                        flex-wrap: wrap;
+                        margin: 10px 20px;
+
+                        width: 140px;
+                    }
+
+                    button, a {
+
+                        display: block;
+                        color: gray;
+                        width: 100px;
+                        height: 36px;
+                        background: transparent;
+                        border: none;
+                        transition: all 0.2s ease-in;
+                        text-decoration: none;
+
+                        &:hover {
+
+                            border-bottom: gray solid 1px;
+                            color: white;
+                        }
+                    }
+                }
+
+                .information {
+
+                    .content {
+                        
+                        margin: 0 3rem;
+
+                        b {
+
+                            text-indent: 72px;
+                            font-size: 36px;
+                            color: rgb(187, 255, 223);
+                        }
+
+                        div > p:first-child {
+
+                            text-indent: 48px;
+                        }
+
+                        div > p {
+
+                            font-size: 24px;
+                            color: rgb(214, 214, 254);
+                        }
+
+                        hr {
+
+                            height: 5px;
+                            background:rgb(163, 232, 255);
+                        }
+
+                        section {
+
+                            margin: 2.5rem 0;
+                        }
+                    }
+                }
+            }
+
+            .flex {
+
+                display: flex;
+
+                justify-content: center;
+                align-items: center;
+            }
+
+            .f_column {
+
+                flex-direction: column;
+            }
+
+            .carrosselcontent {
+
+                margin: 160px 0;
+                background: white;
+                border: #222624 2px solid;
+                border-radius: 10px;
+            }
+
+            @media (max-width: 600px) {
+
+                img.main, div.main {
+
+                    --w: 50svw;
+                    --h: 50svw;
+
+                    left: calc(50svw - (var(--w) / 2));
+                    top: calc(50svh - (var(--h) / 2));
+                }
+
+                .pages .page {
+
+                    width: 100svw;
+
+                    .content {
+
+                        overflow-wrap: break-word;
+                        font-size: 48px;
+                    }
+                }
+
+                main {
+
+                    width: 100svw;
+                }
+
+                .Main .information .content {margin: 0 1rem;}
+            }
+
+            @keyframes xFadeIn {
+
+                0% {
+
+                    opacity: 0; 
+                    width: 0%;
+                    filter: blur(5px);
+                }
+
+                100% { 
+
+                    opacity: 1; 
+                    width: 100%;
+                    filter: blur(0);
+                }
+            }
+
+            @keyframes Rotate {
+
+                0% {
+
+                    transform: rotateY(0deg);
+                }
+
+                50% { 
+
+                    transform: rotateY(360deg);
+                }
+
+                100% { 
+
+                    transform: rotateY(0deg);
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <main>
+
+            <img class = "main" src = "./imag/aurora_large_icon_square.png"/>
+            <div class = "main circle"></div>
+
+            <div class = "backgroundCanvas" id = "canvas-content" style="filter: blur(3px);"></div>
+
+            <div class="pages">
+
+                <div class="page">
+                    <div class="content" id="cont1"> We </div>
+                </div>
+
+                <div class="page">
+                    <div class="content" id="cont2"> Are </div>
+                </div>
+
+                <div class="page">
+                    <div class="content" id="cont3"> ACDGX創世曙光 </div>
+                </div>
+            </div>
+
+            <div class = "Main">
+
+                <nav> 
+                    <div>
+                        <div><img src="./imag/aurora_large_icon_square.png" style = "animation: Rotate 12s ease-in-out infinite;"> <span> ACDGX創世曙光 </span></div>
+                    </div>
+                </nav>
+
+                <div class = "flex f_column">
+
+                    <div class = "flex carrosselcontent" id = "MainCarrossel"> </div>
+                </div>
+
+                <div class = "information">
+
+                    <div class = "content">
+
+                        <section>
+                            <b>⚜️關於我們：</b>
+                            <hr>
+                            <div>
+                                <p>𝔸ℂ𝔻𝔾𝕏◈創世曙光是一個充滿熱情和創造力的團隊，我們致力於探索建築美學在虛擬世界中的無限可能性。</p>
+                                <p>作為一個業餘娛樂團隊，我們將建築模擬和遊戲交流視為我們的主要活動。</p>
+                                <p>我們的團隊成員來自不同的背景，包括建築設計師、遊戲愛好者和創意藝術家，共同匯聚了豐富的經驗和技能。</p>
+                            </div>
+                        </section>
+
+                        <section>
+                            <b>⚜️我們的使命：</b>
+                            <hr>
+                            <div>
+                                <p>我們的使命是通過模擬建築，創造虛擬世界中獨特而引人入勝的建築體驗。</p>
+                                <p>我們相信，建築不僅是功能性的，更是能夠觸動人心、激發想象力和情感的藝術表達。</p>
+                                <p>因此，我們致力於在我們的作品中展現建築的美感、功能性和文化意義，並通過與他人的分享和交流，將這種美學傳播給更多的人。</p>
+                            </div>
+                        </section>
+
+                        <section>
+                            <b>⚜️我們的活動：</b>
+                            <hr>
+                            <div>
+                                <p>我們的團隊活動主要包括以下幾個方面：</p>
+
+                                <p>🎲建築模擬：</p>
+                                <p>我們利用各種虛擬建模工具和遊戲平台，模擬和創建各種類型的建築，包括現代建築、古代建築、科幻建築等。我們不僅注重建築的外觀和結構，還關注其背後的文化背景、功能需求和環境影響。</p>
+
+                                <p>🎲遊戲交流：</p>
+                                <p>除了建築模擬，我們也喜歡通過遊戲來探討和體驗建築的魅力。我們會組織各種建築主題的遊戲活動，分享遊戲中的建築設計技巧、故事背景和遊戲體驗。</p>
+
+                                <p>🎲團隊合作：</p>
+                                <p>在我們的團隊中，團隊合作是至關重要的。我們鼓勵團隊成員相互學習、分享經驗，並共同參與各種項目和活動。</p>
+                                <p>通過團隊合作，我們不僅可以完成更加複雜和具有挑戰性的項目，還可以培養團隊精神和凝聚力。</p>
+                            </div>
+                        </section>
+
+                        <section>
+                            <b>⚜️我們的願景：</b>
+                            <hr>
+                            <div>
+                                <p>我們的願景是成為一個具有影響力和創造力的建築伺服器，為所有熱愛建築和遊戲的人提供一個交流和學習的平台。我們希望通過我們的努力，激發更多的人對建築的興趣和熱情，促進建築藝術和文化的傳承和發展。</p>
+                            </div>
+                        </section>
+
+                        <section>
+                            <b>🎉加入我們</b>
+                            <hr>
+                            <div>
+                                <p>如果你對建築和遊戲充滿熱情，喜歡探索新的創意和想法，那麼我們誠摯地邀請你加入我們的團隊。</p>
+                                <p>無論你是建築設計師、遊戲開發者，還是只是對這個領域感興趣的人，你都可以在我們這裡找到志同道合的夥伴，一起共同創造美好的虛擬世界。</p>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <footer>
+
+                    <section>
+
+                            <button> ⚜️最新消息 </button>
+                            <button> ⚜️關於我們 </button>
+                            <button> ⚜️團隊地圖 </button>
+                            <a href="https://fonts.google.com/specimen/Roboto/license"> 字體授權許可 </a>
+                    </section>
+
+                    <div class = "flex"> <div class = "line"> </div> </div>
+
+                    <div class = "flex"> © 2025 Copyright, All Rights Reserved. </div>
+                </footer>
+            </div>
+        </main>
+
+        <script>
+
+            class Carrossel {
+
+                constructor() {
+
+                    this.class_text = `div.carro_cont_outer {
+
+	display: grid;
+
+	position: relative;
+
+	align-content: center;
+
+	grid-template-rows: 220px 50px;
+
+	.page {
+
+		text-align: center;
+			align-content: center;
+
+		user-select: none;
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-o-user-select: none;
+		-ms-user-select: none;
+
+		a {
+
+			display: inline-block;
+
+			width: 10px;
+			height: 10px;
+
+			border-radius: 5px;
+			box-shadow: black 0 0 5px;
+
+			text-decoration: none;
+
+			margin: 0 10px;
+
+			transition: all 0.16s ease-in;
+
+			&:hover {
+
+				background: #9999ff;
+				box-shadow: blue 0 0 5px;
+
+				transition: all 0.3s ease-out;
+			}
+
+			&:active {
+
+				background: #999999;
+				box-shadow: none;
+
+				transition: all 0.2s ease-in;
+			}
+		}
+	}
+
+	div.mover {
+
+		position: absolute;
+		
+		align-content: center;
+		text-align: center;
+
+		z-index: 5;
+
+		height: 36px;
+		width: 36px;
+
+		border-radius: 18px;
+
+		background: #aaaa;
+		color: white;
+
+		opacity: 0.36;
+
+		&:hover {
+
+			opacity: 1;
+			background: #aaac;
+		}
+
+		&:active {
+
+			color: gray;
+			background: #888c;
+		}
+	}
+
+	div.carro_cont {
+
+		display: flex;
+
+		flex-wrap: wrap;
+		flex-direction: column;
+
+		overflow: hidden;
+
+		width: 300px;
+		height: 200px;
+
+		scroll-snap-type: x mandatory;
+
+		margin: 12px 12px;
+
+		border: 2px inset black;
+
+		.card {
+
+			width: 100%;
+			height: 100%;
+
+			scroll-snap-align: center;
+			scroll-behavior: smooth;
+
+			color: white;
+
+			align-content: end;
+			text-align: left;
+
+			padding: 20px 20px;
+
+			box-sizing: border-box;
+		}
+	}
+
+	#i_mover_l {
+
+		left: 20px; 
+		top: calc(106px - 9px);
+	}
+
+	#i_mover_r {
+
+		right: 20px;
+		top: calc(106px - 9px);
+	}
+}`;
+                    this.AutoPageChangeTimer = null;
+                    this.CarrosselElement = null;
+                }
+
+                static MakeData (title, link, background) {
+
+                    return {title: title, link: link, background: background || "#FAA"};
+                }
+
+                SetIDandClass(etype, id, classes, innertext) {
+
+                    let e = document.createElement(etype);
+
+                    if (id) {e.id = id;}
+
+                    classes.forEach(c => {
+
+                        e.classList.add(c);
+                    }); 
+
+                    if (innertext) {e.innerText = innertext;}
+
+                    return e;
+                }
+
+                MakeCarrossel(datas) {
+
+                    if (datas.length) {} else {return null;}
+                    
+                    //Creat css Element
+                    if (document.querySelector("#i_carro_style") === null) {
+
+                        let Css = this.SetIDandClass("style", "i_carro_style", [], this.class_text);
+
+                        document.querySelector("head").appendChild(Css);
+                    }
+                    //Creat Element
+                    let Outer = this.SetIDandClass("div", null, ["carro_cont_outer"], null);
+
+                    let MoverLeft = this.SetIDandClass("div", "i_mover_l", ["mover"], "<");
+                    let MoverRight = this.SetIDandClass("div", "i_mover_r", ["mover"], ">");
+                    let Container = this.SetIDandClass("div", "i_container", ["carro_cont"], ">");
+
+                    for (let i = 0; i < datas.length; i++) {
+
+                        let e = this.SetIDandClass("div", "i_card" + Math.floor(i), ["card"], null);
+                        let a = this.SetIDandClass("a", null, [], datas[i].title);
+                        a.href = datas[i].link;
+
+                        e.style.background = datas[i].background;
+                        e.appendChild(a);
+
+                        Container.appendChild(e);
+                    }
+
+                    let PageButtons = this.SetIDandClass("div", "i_page", ["page"], null);
+
+                    for (let i = 0; i < datas.length; i++) {
+
+                        let a = this.SetIDandClass("a", null, [], null);
+                        a.href = "#i_card" + Math.floor(i);
+
+                        PageButtons.appendChild(a);
+                    }
+
+                    Outer.appendChild(MoverLeft);
+                    Outer.appendChild(MoverRight);
+                    Outer.appendChild(Container);
+                    Outer.appendChild(PageButtons);
+
+                    this.ismousedown = false;
+                    this.root = document.documentElement;
+                    this.crpos = {bar_left: null, x: null};
+                    this.cs = 0;
+                    this.isc = false;
+
+                    Container.addEventListener("mousedown", (e) => {
+                        
+                        this.cs = 0;
+
+                        this.ismousedown = true;
+
+                        this.crpos = {bar_left: Container.scrollLeft, x: e.clientX}
+
+                        Container.style.scrollSnapType = "none";
+
+                        CancelDefault(e);
+                    }, false);
+
+                    this.root.addEventListener("mouseup", (e) => {
+                        
+                        this.ismousedown = false;
+
+                        Container.style.scrollSnapType = "x mandatory";
+                        
+                        CancelDefault(e);
+                    }, false);
+
+                    this.root.addEventListener("mousemove", (e) => {
+                        
+                        let ci = 0.05;
+
+                        if (this.ismousedown === true) {
+
+                            ci = (this.cs++ <= 10) ? 0.4 : 0.05;
+                            
+                            Container.scrollLeft -= (e.clientX - this.crpos.x)*ci;
+                            this.isc = true;
+                        }
+
+                        PageButtonChange(Container.scrollLeft/300);
+
+                        CancelDefault(e);
+                    }, false);
+                    
+                    function CancelDefault(e) {
+
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }
+
+                    for (let i = 0; i < Container.children.length; i++) {
+
+                        Container.children[i].addEventListener('click',() => {PageButtonChange(i); this.isc = true;});
+                    };
+
+                    for (let i = 0; i < Container.children.length; i++) {
+
+                        PageButtons.children[i].addEventListener('click',() => {PageButtonChange(i); this.isc = true;});
+                    };
+
+                    MoverLeft.addEventListener('click', () => {
+                        
+                        if (Container.scrollLeft === (Container.children.length - 1)*300) {
+
+                            Container.scrollLeft = 0;
+                        } else {
+
+                            Container.scrollLeft = Container.scrollLeft + 300;
+                        }
+
+                        PageButtonChange(Container.scrollLeft/300);
+
+                        this.isc = true;
+                    });
+
+                    MoverRight.addEventListener('click', () => {
+
+                        if (Container.scrollLeft === 0) {
+
+                            Container.scrollLeft = (Container.children.length - 1)*300;
+                        } else {
+
+                            Container.scrollLeft = Container.scrollLeft - 300;
+                        }
+
+                        PageButtonChange(Container.scrollLeft/300);
+
+                        this.isc = true;
+                    });
+
+                    function PageButtonChange(i) {
+
+                        for (let j = 0; j < PageButtons.children.length; j++) {
+
+                            if (j === i) {
+
+                                PageButtons.children[j].style.background = "#ff0";
+                            } else {
+
+                                PageButtons.children[j].style.background = "";
+                            }
+                        }
+                    }
+
+                    PageButtonChange(0);
+
+                    if (this.AutoPageChangeTimer === null) {
+
+                        function AutoPageChange() {
+                            
+                            if (this.isc !== true) {
+
+                                if (Container.scrollLeft === (Container.children.length - 1)*300) {
+
+                                    Container.scrollLeft = 0;
+                                } else {
+
+                                    Container.scrollLeft = Container.scrollLeft + 300;
+                                }
+                            }
+
+                            PageButtonChange(Container.scrollLeft/300);
+
+                            this.isc = false;
+                        }
+
+                        
+                        setInterval(AutoPageChange, 6000);
+                    }
+
+                    if (this.CarrosselElement !== null) {
+
+                        this.CarrosselElement.remove();
+                    }
+
+                    this.CarrosselElement = Outer;
+
+                    return Outer;
+                }
+            }
+        </script>
+
+        <script>
+
+            let vertSrc = `precision highp float;
+
+uniform mat4 uModelViewMatrix;
+uniform mat4 uProjectionMatrix;
+
+uniform vec2 u_resolution;  
+uniform vec2 u_mouse;       
+uniform float u_time;     
+attribute vec3 aPosition;
+attribute vec2 aTexCoord;
+varying vec2 vTexCoord;
+varying vec3 vPosition;
+
+void main() {
+    vTexCoord = aTexCoord;
+    vPosition = aPosition;
+    vec4 positionVec4 = vec4(aPosition, 1.0);
+    gl_Position = uProjectionMatrix * uModelViewMatrix * positionVec4;
+}
+    `;
+
+            let fragSrc = `precision highp float;
+
+uniform vec2 u_resolution;
+uniform float u_time;
+
+uniform float addM;
+
+vec2 randomseed(vec2 _st) {
+
+  return fract(cos(_st*12.9898)*43758.5453123);
+}
+
+void main(){
+
+	float cellsize = 0.5;
+    
+    float speed_1 = 2.;
+    float speed_2 = 0.5;
+    float scale = 3.;
+    float time = abs(sin(u_time))*speed_1;
+    vec2 UV = (gl_FragCoord.xy / u_resolution.xy)*scale;
+    UV.y = UV.y - addM*10. + mod(u_time*0.01, 0.1);
+    vec2 suv = mod((UV - 0.5)*2.,cellsize);
+    
+    vec2 lsize = randomseed(floor(UV/cellsize+0.5 + time))*(cos(u_time*speed_2) + 1.)*0.25 + 0.01;
+    
+    if (((suv.x < cellsize*0.5 + lsize.y) && (suv.x > cellsize*0.5 - lsize.x)) && ((suv.y < cellsize*0.5 + lsize.y) && (suv.y > cellsize*0.5 - lsize.x))) {
+        
+        float M = 0.2*(sin(u_time*speed_2*2.5) + 1.2);
+        gl_FragColor = vec4(M,M*0.5,0.1,1. - distance(suv, vec2(cellsize*0.5)));
+    }
+
+    float ANGLE = addM*7. - 0.7853;
+    vec2 dUV = (gl_FragCoord.xy / u_resolution.xy);
+    dUV.x = dUV.x + cos(ANGLE);
+    dUV.y = dUV.y + sin(ANGLE);
+
+    if (distance((gl_FragCoord.xy / u_resolution.xy), vec2(0.5 + dUV*(addM + 0.1))) < (0.1 + addM*0.1)) {
+    
+        gl_FragColor = gl_FragColor + vec4(0.9,0.5,0.1,0.1)*abs(atan(dUV.y,dUV.x));
+    } else if (distance((gl_FragCoord.xy / u_resolution.xy), vec2(0.5 + dUV*(addM + 0.1))) < (0.101 + addM*0.1)) {
+    
+        gl_FragColor = mix(gl_FragColor, vec4(0.8,0.4,0.,1.), 0.6);
+    }
+
+    gl_FragColor.r = gl_FragColor.r + sin(distance(UV*(addM - 0.01), vec2(cellsize*0.5)));
+    gl_FragColor.g = gl_FragColor.g + sin(distance(UV*(addM + 0.01), vec2(cellsize*0.5)));
+    gl_FragColor.b = gl_FragColor.b + sin(distance(UV*(addM + 0.03), vec2(cellsize*0.5)));
+    //gl_FragColor = gl_FragColor + vec4(max(exp(1. / distance(gl_FragCoord.xy / u_resolution.xy, vec2(0.5)))*addM*0.5 + randomseed(vec2(u_time)).x*0.01, 0.));
+}`;
+
+            function mayMobile() {
+
+                return window.innerWidth < window.innerHeight;
+            }
+
+            function getPreferSize() {
+
+                return mayMobile() ? (window.innerHeight + 12) : window.innerWidth;
+            }
+
+            function preload() {
+
+                shaderProgram = createShader(vertSrc, fragSrc);
+
+                [w, h] = [getPreferSize(), getPreferSize()];
+            }
+
+            function setup() {
+
+                let canvas = createCanvas(w, h, WEBGL);
+                canvas.parent("canvas-content");
+                canvas.class = "canvas";
+            }
+
+            function draw() {
+
+                background(0);
+
+                shaderProgram.setUniform('u_resolution', [width, width]);
+                shaderProgram.setUniform('u_time', millis() * 0.001);
+                shaderProgram.setUniform('addM', Math.min(window.scrollY*0.0005,1.));
+                shader(shaderProgram);
+
+                plane(width, width);
+            }
+
+            function windowResized(){
+
+                [w, h] = [getPreferSize(), getPreferSize()];
+                resizeCanvas(w, h);
+            }
+
+            addEventListener("resize",  windowResized);
+            //
+            let carrossel = new Carrossel();
+            let carrossel_data = [
+                Carrossel.MakeData("GREEN", "https://www.google.com/", "#AFA"),
+                Carrossel.MakeData("RED", "https://godotshaders.com/author/xcv145336/", "#FAA"),
+                Carrossel.MakeData("BLCAK", "https://forum.gamer.com.tw/C.php?bsn=11902&snA=290163&tnum=4", "#000")
+            ];
+
+            document.getElementById("MainCarrossel").appendChild(carrossel.MakeCarrossel(carrossel_data));
+        </script>
+    </body>
+</html>
