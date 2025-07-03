@@ -1163,6 +1163,40 @@ void main(){
             ];
 
             document.getElementById("MainCarrossel").appendChild(carrossel.MakeCarrossel(carrossel_data));
+            /*
+            let Autoscroller = {
+                
+                Timer: null,
+                t: 0
+            };
+            
+            window.addEventListener("scroll", () => {
+
+                clearInterval(Autoscroller.Timer);
+                clearTimeout(Scrollini);
+            });
+
+            Autoscroller.Timer = setInterval((function(){
+
+                this.t += 1.25;
+
+                if (this.t > 2) {
+
+                    window.scroll({
+
+                        top: window.scrollY + window.innerHeight,
+                        left: 0,
+                        behavior: 'smooth'
+                    });
+
+                    if (window.scrollY >= window.innerHeight*4) {
+
+                        clearInterval(this.Timer);
+                    }
+                }
+            }).bind(Autoscroller), 1250);
+
+            let Scrollini = setTimeout(window.scroll({top: 0}), 100);*/
         </script>
 
         <script>
