@@ -972,6 +972,7 @@
                         let e = this.SetIDandClass("div", "i_card" + Math.floor(i), ["card"], null);
                         let a = this.SetIDandClass("a", null, [], datas[i].title);
                         a.href = datas[i].link;
+                        a.target = "_blank";
                         a.setAttribute("style",  "color : #008; text-shadow: gray 1px 1px, white -2px -2px, white 0px 2px, white 0px -2px, white 2px 0px, white -2px 0px;");
 
                         if (datas[i].background.includes("#")) {
