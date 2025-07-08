@@ -314,6 +314,7 @@
                                 font-size: 20px;
                                 color: white;
                                 font-family: 'Roboto', Courier, monospace;
+                                text-shadow: #9ff 0px 0px 10px;
                             }
                         }
                     }
@@ -1250,8 +1251,8 @@ void main(){
             let carrossel = new Carrossel(Math.min(620, window.innerWidth - 100), "rgb(163, 232, 255)");
             let carrossel_data = [
                 Carrossel.MakeData("ACDGX創世曙光 instagram", "https://www.instagram.com/auroracd_genesisx/", "https://iili.io/F1n8NVf.png"),
-                Carrossel.MakeData("Shader", "https://godotshaders.com/author/xcv145336/", "#FAA"),
-                Carrossel.MakeData("還是Test(りしれ供さ小2)", "https://www.google.com/", "#FFF")
+                Carrossel.MakeData("2D shader創作", "https://godotshaders.com/author/xcv145336/", "https://godotshaders.com/wp-content/uploads/2021/01/1-1.gif"),
+                Carrossel.MakeData("空的", "https://www.google.com/", "#FFF")
             ];
 
             document.getElementById("MainCarrossel").appendChild(carrossel.MakeCarrossel(carrossel_data));
