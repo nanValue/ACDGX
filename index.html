@@ -971,8 +971,16 @@
                         let e = this.SetIDandClass("div", "i_card" + Math.floor(i), ["card"], null);
                         let a = this.SetIDandClass("a", null, [], datas[i].title);
                         a.href = datas[i].link;
+                        a.setAttribute("style",  "color : #008; text-shadow: gray 1px 1px, white -2px -2px, white 0px 2px, white 0px -2px, white 2px 0px, white -2px 0px;");
 
-                        e.style.background = datas[i].background;
+                        if (datas[i].background.includes("#")) {
+
+                            e.style.background = datas[i].background;
+                        } else {
+
+                            e.setAttribute("style", `background-image: url(${datas[i].background});background-size: cover; background-position: center; width: 100%;`);
+                        }
+
                         e.appendChild(a);
 
                         Container.appendChild(e);
@@ -1241,7 +1249,7 @@ void main(){
             //
             let carrossel = new Carrossel(Math.min(620, window.innerWidth - 100), "rgb(163, 232, 255)");
             let carrossel_data = [
-                Carrossel.MakeData("Test", "https://www.google.com/", "#AFA"),
+                Carrossel.MakeData("ACDGX創世曙光 instagram", "https://www.instagram.com/auroracd_genesisx/", "https://iili.io/F1n8NVf.png"),
                 Carrossel.MakeData("Shader", "https://godotshaders.com/author/xcv145336/", "#FAA"),
                 Carrossel.MakeData("還是Test(りしれ供さ小2)", "https://www.google.com/", "#FFF")
             ];
