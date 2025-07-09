@@ -469,7 +469,7 @@
                 flex-direction: column;
             }
 
-            .carrosselcontent {
+            .carouselcontent {
 
                 margin: 160px 0;
                 background: white;
@@ -642,7 +642,7 @@
 
                 <div class = "flex f_column">
 
-                    <div class = "flex carrosselcontent" id = "MainCarrossel"> </div>
+                    <div class = "flex carouselcontent" id = "MainCarousel"> </div>
                 </div>
 
                 <div class = "information">
@@ -711,7 +711,7 @@
                     <section>
 
                         <div class = "buttons">
-                            <a href = "#MainCarrossel"> ⚜️最新消息 </a>
+                            <a href = "#MainCarousel"> ⚜️最新消息 </a>
                             <a href = "#AboutUs"> ⚜️關於我們 </a>
                             <button> ⚜️團隊地圖 </button>
                             <a href="https://fonts.google.com/specimen/Roboto/license"> 字體授權許可 </a>
@@ -756,7 +756,7 @@
 
         <script>
 
-            class Carrossel {
+            class Carousel {
 
                 constructor(card_width, color_text) {
 
@@ -905,7 +905,7 @@
 	}
 }`;
                     this.AutoPageChangeTimer = null;
-                    this.CarrosselElement = null;
+                    this.CarouselElement = null;
                     this.nowpage = 0;
                 }
 
@@ -949,7 +949,7 @@
                     }
                 }
 
-                MakeCarrossel(datas) {
+                MakeCarousel(datas) {
 
                     if (datas.length) {} else {return null;}
                     
@@ -1118,12 +1118,12 @@
                         setInterval(AutoPageChange.bind(this), 6000);
                     }
 
-                    if (this.CarrosselElement !== null) {
+                    if (this.CarouselElement !== null) {
 
-                        this.CarrosselElement.remove();
+                        this.CarouselElement.remove();
                     }
 
-                    this.CarrosselElement = Outer;
+                    this.CarouselElement = Outer;
                     this.PageButtonChange(0);
 
                     return Outer;
@@ -1249,14 +1249,14 @@ void main(){
 
             addEventListener("resize",  windowResized);
             //
-            let carrossel = new Carrossel(Math.min(620, window.innerWidth - 100), "rgb(163, 232, 255)");
-            let carrossel_data = [
-                Carrossel.MakeData("ACDGX創世曙光 instagram", "https://www.instagram.com/auroracd_genesisx/", "https://iili.io/F1n8NVf.png"),
-                Carrossel.MakeData("2D shader創作", "https://godotshaders.com/author/xcv145336/", "https://godotshaders.com/wp-content/uploads/2021/01/1-1.gif"),
-                Carrossel.MakeData("空的", "https://www.google.com/", "#FFF")
+            let carousel = new Carousel(Math.min(620, window.innerWidth - 100), "rgb(163, 232, 255)");
+            let carousel_data = [
+                Carousel.MakeData("ACDGX創世曙光 instagram", "https://www.instagram.com/auroracd_genesisx/", "https://iili.io/F1n8NVf.png"),
+                Carousel.MakeData("2D shader創作", "https://godotshaders.com/author/xcv145336/", "https://godotshaders.com/wp-content/uploads/2021/01/1-1.gif"),
+                Carousel.MakeData("空的", "https://www.google.com/", "#FFF")
             ];
 
-            document.getElementById("MainCarrossel").appendChild(carrossel.MakeCarrossel(carrossel_data));
+            document.getElementById("MainCarousel").appendChild(carousel.MakeCarousel(carousel_data));
             /*
             let Autoscroller = {
                 
