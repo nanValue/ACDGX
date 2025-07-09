@@ -1244,7 +1244,7 @@ void main(){
             function windowResized(){
 
                 [w, h] = [getPreferSize(), getPreferSize()];
-                resizeCanvas(w, h);
+                redraw();
             }
 
             addEventListener("resize",  windowResized);
