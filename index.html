@@ -1244,10 +1244,10 @@ void main(){
             function windowResized(){
 
                 [w, h] = [getPreferSize(), getPreferSize()];
-                redraw();
+                resizeCanvas(w, h, true);
             }
 
-            addEventListener("resize",  windowResized);
+            /*addEventListener("resize",  windowResized);*/
             //
             let carousel = new Carousel(Math.min(620, window.innerWidth - 100), "rgb(163, 232, 255)");
             let carousel_data = [
