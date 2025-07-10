@@ -55,7 +55,7 @@
                     background: rgb(46, 51, 51);
                     z-index: 2;
  
-                    transition: all 2.5s ease-in-out;
+                    transition: opacity 2.5s ease-in-out;
 
                     span {
 
@@ -516,6 +516,8 @@
 
                 .Main footer section {
                 
+                    width: 100svw;
+
                     div.buttons, div.links{position: static;}
                 }
 
@@ -523,7 +525,21 @@
 
                     grid-template-rows: auto 30px 45px;
 
-                    section {display: flex; flex-direction: column; align-items: center;}
+                    section {
+                        
+                        display: flex; 
+                        flex-direction: 
+                        column; 
+                        align-items: center;
+                    }
+
+                    .line {
+
+                        margin: 5px 0;
+                        width: calc(100svw - 20px);
+                        height: 2px;
+                        background: white;
+                    }
                 }
             }
 
