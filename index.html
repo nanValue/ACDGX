@@ -1159,9 +1159,35 @@
                     return Outer;
                 }
             }
+
+            let carousel = new Carousel(Math.min(620, window.innerWidth - 100), "rgb(163, 232, 255)");
+            let carousel_data = [
+                Carousel.MakeData("ACDGX創世曙光 instagram", "https://www.instagram.com/auroracd_genesisx/", "https://iili.io/F1n8NVf.png"),
+                Carousel.MakeData("2D shader創作", "https://godotshaders.com/author/xcv145336/", "https://godotshaders.com/wp-content/uploads/2021/01/1-1.gif"),
+                Carousel.MakeData("空的", "https://www.google.com/", "#FFF")
+            ];
+
+            document.getElementById("MainCarousel").appendChild(carousel.MakeCarousel(carousel_data));
         </script>
 
         <script>
+
+            let canvas = document.createElement("canvas");
+
+            let gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+
+            let tf = gl instanceof WebGLRenderingContext;
+
+            canvas = null;
+            gl = null;
+
+            if (tf) {
+
+                document.getElementById("canvas-content").setAttribute("style", `background-image: url("https://iili.io/FEOgiPV.jpg"); background-size: cover;`);
+                return;
+            }
+
+            tf = null;
 
             let vertSrc = `precision highp float;
 
@@ -1277,16 +1303,9 @@ void main(){
                 resizeCanvas(w, h, true);
             }
 
-            /*addEventListener("resize",  windowResized);*/
-            //
-            let carousel = new Carousel(Math.min(620, window.innerWidth - 100), "rgb(163, 232, 255)");
-            let carousel_data = [
-                Carousel.MakeData("ACDGX創世曙光 instagram", "https://www.instagram.com/auroracd_genesisx/", "https://iili.io/F1n8NVf.png"),
-                Carousel.MakeData("2D shader創作", "https://godotshaders.com/author/xcv145336/", "https://godotshaders.com/wp-content/uploads/2021/01/1-1.gif"),
-                Carousel.MakeData("空的", "https://www.google.com/", "#FFF")
-            ];
+        </script>
 
-            document.getElementById("MainCarousel").appendChild(carousel.MakeCarousel(carousel_data));
+        <script>
             /*
             let Autoscroller = {
                 
