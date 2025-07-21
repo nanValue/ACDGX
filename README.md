@@ -49,7 +49,7 @@
 
 ## 📄 License
 
-Content © ACDGX Team. Code under MIT License.
+Content © ACDGX Team.
 ---
 
 # ⚜️ ACDGX ◈ Dawn of Creation
@@ -104,4 +104,4 @@ Meet like-minded creators and build amazing virtual worlds together.
 
 ## 📄 License
 
-Content © ACDGX Team. Code under MIT License.
+Content © ACDGX Team.
